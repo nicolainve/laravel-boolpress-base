@@ -96,7 +96,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $request->validate($this->ruleValidation());
+
+        $post = Post::find($id);
+
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        if(!empty($data['path_img'])) {
+            if (!empty($post->path_img)) {
+                Storage::disk('public')->delete($post->path_img);
+            }
+            $data['path_img'] = Storage::disk('public')->put('images', $data['path_img']);
+        }
+
+        $updated = $post->update($data);
+
+        if($updated) {
+            return redirect()->route('posts.show', $post->slug);
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     /**
