@@ -18,6 +18,7 @@
                 <p>No post found. Go and <a href="{{ route('posts.create') }}">create a new one</a></p>
         @endforelse
 
+        {{ $posts->links() }}
     </div>
 
 @endsection

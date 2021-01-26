@@ -6,8 +6,14 @@
         
         <h1>{{ $post->title }}</h1>
         <div>Last updated: {{ $post->updated_at->diffForHumans() }}</div>
-        <div class="actions mb-5">
-            <a class="btn btn-primary mt-2"href="{{ route('posts.edit', $post->slug) }}">Edit</a>
+        <div class="actions mt-2 mb-5">
+            <a class="btn btn-primary"href="{{ route('posts.edit', $post->slug) }}">Edit</a>
+            <form class="d-inline" action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
         </div>
 
         @if(!empty($post->path_img))
