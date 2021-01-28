@@ -42,6 +42,24 @@
             </div>
 
             <div class="form-group">
+                <label for="post_status">Post status</label>
+                <select name="post_status" id="post_status">
+                    <option value="public" {{ old('post_status', $post->infoPost->post_status) == 'public' ? 'selected' : '' }}>Public</option>
+                    <option value="private" {{ old('post_status', $post->infoPost->post_status) == 'private' ? 'selected' : '' }}>Private</option>
+                    <option value="draft" {{ old('post_status', $post->infoPost->post_status) == 'draft' ? 'selected' : '' }}>Draft</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comment_status">Comment status</label>
+                <select name="comment_status" id="comment_status">
+                    <option value="open" {{ old('comment_status', $post->infoPost->comment_status) == 'open' ? 'selected' : '' }}>Open</option>
+                    <option value="closed" {{ old('comment_status', $post->infoPost->comment_status) == 'closed' ? 'selected' : '' }}>Closed</option>
+                    <option value="private" {{ old('comment_status', $post->infoPost->comment_status) == 'private' ? 'selected' : '' }}>Private</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Update Post">
             </div>
         </form>

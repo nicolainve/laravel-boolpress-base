@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\InfoPost;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -54,7 +55,13 @@ class PostController extends Controller
 
         $saved = $newPost->save();
 
-        if($saved) {
+        $data['post_id'] = $newPost->id;
+        $newInfo = new infoPost($data);
+        $newInfo->fill($data);
+        $newInfo->save();
+        $infoSaved = $newInfo->save();
+
+        if($saved && $infoSaved) {
             return redirect()->route('posts.index');
         } else {
             return redirect()->route('home');
@@ -113,7 +120,11 @@ class PostController extends Controller
 
         $updated = $post->update($data);
 
-        if($updated) {
+        $data['post_id'] = $post->id;
+        $info = InfoPost::where('post_id', $post->id)->first();
+        $infoUpdated = $info->update($data);
+
+        if($updated && $infoUpdated) {
             return redirect()->route('posts.show', $post->slug);
         } else {
             return redirect()->route('home');
