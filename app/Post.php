@@ -13,4 +13,12 @@ class Post extends Model
         'slug',
         'path_img',
     ];
+
+    public function infoPost() {
+        return $this->hasOne('App\InfoPost');
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
 }

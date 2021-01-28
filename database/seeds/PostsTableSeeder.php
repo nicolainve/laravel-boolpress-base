@@ -14,7 +14,6 @@ class PostsTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        Post::truncate();
         for ($i = 0; $i < 10; $i++) {
             $title = $faker->text(50);
             $newPost = new Post;

@@ -128,7 +128,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $title = $post->title;
+        $tit = $post->title;
         $image = $post->path_img;
         $deleted = $post->delete();
 
@@ -136,7 +136,7 @@ class PostController extends Controller
             if (!empty($post->$image)) {
                 Storage::disk('public')->delete($post->$image);
             }
-            return redirect()->route('posts.index')->with('post-delete', $title);
+            return redirect()->route('posts.index')->with('post-delete', $tit);
         } else {
             return redirect()->route('home');
         }
