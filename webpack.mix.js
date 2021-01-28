@@ -17,6 +17,7 @@ mix.disableNotifications()
     .browserSync({
         proxy: '127.0.0.1:8000',
         open: false,
+        online: false,
         notify: false,
         watch: true,
     });
